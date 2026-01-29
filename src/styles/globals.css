@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-neutral-200;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 font-sans;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-neutral-900/70 backdrop-blur-xl border border-white/10;
+  }
+
+  /* 3D Card effect */
+  .card-3d {
+    @apply relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .card-3d:hover {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+  }
+
+  .card-3d::before {
+    content: '';
+    @apply absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-500;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+  }
+
+  .card-3d:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Gradient text */
+  .gradient-text-3d {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #0ea5e9 0%, #001035 100%);
+  }
+
+  /* Animated gradient background */
+  .animated-gradient-3d {
+    background: linear-gradient(-45deg, #0ea5e9, #001035, #38bdf8, #0c4a6e);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+
+  /* Mesh gradient background */
+  .mesh-gradient {
+    background: radial-gradient(at 0% 0%, hsla(210, 100%, 70%, 0.3) 0px, transparent 50%),
+      radial-gradient(at 50% 0%, hsla(189, 100%, 56%, 0.3) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(242, 100%, 70%, 0.3) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 0.3) 0px, transparent 50%),
+      radial-gradient(at 100% 50%, hsla(242, 100%, 70%, 0.3) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(355, 100%, 93%, 0.3) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, hsla(210, 100%, 70%, 0.3) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(189, 100%, 56%, 0.3) 0px, transparent 50%);
+  }
+
+  /* Shimmer effect */
+  .shimmer-effect {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Floating animation */
+  .float-3d {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Perspective container */
+  .perspective-view {
+    perspective: 1000px;
+  }
+
+  /* Glow effect */
+  .glow-on-hover-3d {
+    @apply relative overflow-hidden;
+  }
+
+  .glow-on-hover-3d::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    background: radial-gradient(circle at center, rgba(14, 165, 233, 0.3) 0%, transparent 70%);
+  }
+
+  .glow-on-hover-3d:hover::before {
+    @apply opacity-100;
+  }
+}
+
+@layer utilities {
+
+  /* Text balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hide scrollbar */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-neutral-100 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 rounded-full hover:bg-neutral-400;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(0, 16, 53, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 16, 53, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+}
