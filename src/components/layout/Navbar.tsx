@@ -31,47 +31,47 @@ export const Navbar: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div
-          className={`flex justify-between items-center px-8 py-4 rounded-[2rem] transition-all duration-500 ${scrolled ? 'glass shadow-soft-lg' : 'bg-transparent'
+          className={`flex justify-between items-center px-8 py-4 rounded-[2rem] transition-all duration-500 ${scrolled ? 'bg-primary-950/85 backdrop-blur-xl border border-primary-300/15 shadow-soft-lg' : 'bg-transparent'
             }`}
         >
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden rounded-xl shadow-lg transition-all duration-300 group-hover:scale-110">
-              <img src="/logo.png" alt="Sandbox Scholars" className="w-full h-full object-cover" />
+            <div className="relative w-10 h-10 flex items-center justify-center overflow-hidden rounded-xl shadow-lg transition-all duration-300 group-hover:scale-105">
+              <img src="/sandbox-scholars-logo.svg" alt="Sandbox Scholars" className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tighter text-neutral-950 leading-none">
+              <span className={`text-lg font-bold tracking-tighter leading-none transition-colors ${scrolled ? 'text-white' : 'text-primary-950'}`}>
                 Sandbox
               </span>
-              <span className="text-[8px] font-bold tracking-[0.3em] uppercase text-primary-500 leading-none mt-1">
+              <span className={`text-[8px] font-bold tracking-[0.3em] uppercase leading-none mt-1 transition-colors ${scrolled ? 'text-primary-200' : 'text-primary-600'}`}>
                 Scholars
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 ${isActive(link.path)
-                    ? 'text-primary-500'
-                    : 'text-neutral-500 hover:text-neutral-950'
+                  ? 'text-primary-300'
+                  : scrolled
+                    ? 'text-primary-100/80 hover:text-white'
+                    : 'text-neutral-500 hover:text-primary-900'
                   }`}
               >
                 {link.label}
               </Link>
             ))}
             <Link to="/assessment">
-              <button className="px-6 py-2.5 bg-primary-950 text-white rounded-xl font-bold tracking-widest text-[10px] uppercase hover:bg-black transition-all hover:scale-105 shadow-soft">
+              <button className="px-6 py-2.5 bg-primary-600 text-white rounded-xl font-bold tracking-widest text-[10px] uppercase hover:bg-primary-500 transition-all hover:scale-[1.02] hover:shadow-soft-lg shadow-soft">
                 Initialize
               </button>
             </Link>
           </div>
 
-          {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 text-neutral-950"
+            className={`md:hidden p-2 ${scrolled ? 'text-white' : 'text-primary-950'}`}
             onClick={() => setIsOpen(!isOpen)}
           >
             <div className="w-6 h-5 flex flex-col justify-between">
@@ -82,24 +82,24 @@ export const Navbar: React.FC = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
               className="md:hidden mt-4"
             >
-              <div className="glass p-6 rounded-[2rem] space-y-4 shadow-soft-xl border border-white/40">
+              <div className="bg-white/95 backdrop-blur-xl p-6 rounded-[2rem] space-y-4 shadow-soft-xl border border-primary-100">
                 {navLinks.map((link) => (
                   <Link
                     key={link.path}
                     to={link.path}
                     onClick={() => setIsOpen(false)}
                     className={`block px-6 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${isActive(link.path)
-                        ? 'bg-primary-50 text-primary-600'
-                        : 'text-neutral-500 hover:bg-neutral-50'
+                      ? 'bg-primary-100 text-primary-700'
+                      : 'text-neutral-500 hover:bg-primary-50 hover:text-primary-800'
                       }`}
                   >
                     {link.label}
@@ -107,7 +107,7 @@ export const Navbar: React.FC = () => {
                 ))}
                 <div className="pt-2">
                   <Link to="/assessment" onClick={() => setIsOpen(false)}>
-                    <button className="w-full py-4 bg-primary-950 text-white rounded-2xl font-bold tracking-widest text-[10px] uppercase">
+                    <button className="w-full py-4 bg-primary-700 text-white rounded-2xl font-bold tracking-widest text-[10px] uppercase hover:bg-primary-600 transition-colors">
                       Start Assessment
                     </button>
                   </Link>

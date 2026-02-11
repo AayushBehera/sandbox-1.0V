@@ -61,44 +61,30 @@ const howItWorksSteps = [
   },
 ];
 
-const features = [
-  {
-    title: 'Architectural Roadmaps',
-    description: 'Precision-engineered paths for career transitions with multi-track support.',
-  },
-  {
-    title: 'Domain Intelligence',
-    description: 'Deep analytical matching across tech, medicine, humanities, and commerce.',
-  },
-  {
-    title: 'Strategic Comparison',
-    description: 'Side-by-side technical evaluation of multiple professional trajectories.',
-  },
-];
-
 export const Home: React.FC = () => {
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const opacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
 
   return (
-    <div className="min-h-screen bg-neutral-50 overflow-x-hidden">
-      {/* Immersive Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 mesh-gradient opacity-60" />
+    <div className="min-h-screen bg-primary-50 overflow-x-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden brand-arch-bg subtle-noise">
+        <div className="absolute inset-0 mesh-gradient opacity-70" />
+        <div className="absolute inset-0 brand-arches" />
         <ParticleBackground />
 
         <Container className="relative z-10 pt-20">
           <motion.div style={{ opacity }} className="text-center max-w-5xl mx-auto">
             <ScrollReveal animation="fade-in-down">
               <div className="inline-block mb-8">
-                <span className="px-6 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase bg-white/40 backdrop-blur-md border border-white/20 text-primary-950">
+                <span className="px-6 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase bg-white/60 backdrop-blur-md border border-primary-200 text-primary-900 shadow-soft">
                   Artificial Intelligence • Strategic Growth
                 </span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-              <h1 className="text-display-2xl md:text-display-xl font-bold mb-8 text-neutral-950 tracking-tighter leading-[0.9] text-balance">
+              <h1 className="text-display-2xl md:text-display-xl font-bold mb-8 text-primary-950 tracking-tighter leading-[0.9] text-balance">
                 <span className="gradient-text-3d">Architect your</span>
                 <br />
                 Professional Destiny.
@@ -106,7 +92,7 @@ export const Home: React.FC = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={200}>
-              <p className="text-lg md:text-2xl text-neutral-600 mb-12 max-w-2xl mx-auto font-medium opacity-80 text-balance">
+              <p className="text-lg md:text-2xl text-primary-900/80 mb-12 max-w-2xl mx-auto font-medium text-balance">
                 The world's most advanced career engineering platform for the modern scholar.
               </p>
             </ScrollReveal>
@@ -114,27 +100,26 @@ export const Home: React.FC = () => {
             <ScrollReveal delay={300}>
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
                 <Link to="/assessment">
-                  <AnimatedButton className="group relative px-10 py-5 bg-primary-950 text-white rounded-full font-bold overflow-hidden transition-all hover:scale-105 hover:shadow-glow-lg border-none">
+                  <AnimatedButton className="group relative px-10 py-5 bg-primary-900 text-white rounded-full font-bold overflow-hidden transition-all hover:scale-[1.02] hover:shadow-soft-xl border-none">
                     <span className="relative z-10">Start Assessment</span>
                     <div className="absolute inset-0 shimmer-effect opacity-0 group-hover:opacity-100" />
                   </AnimatedButton>
                 </Link>
                 <Link to="/results">
-                  <button className="px-10 py-5 glass text-primary-950 rounded-full font-bold border border-white/40 hover:bg-white transition-all hover:scale-105">
+                  <button className="px-10 py-5 glass text-primary-900 rounded-full font-bold border border-primary-100 hover:bg-white transition-all duration-300 hover:scale-[1.02] hover:shadow-soft">
                     Explore Careers
                   </button>
                 </Link>
               </div>
             </ScrollReveal>
 
-            {/* 3D Showcase */}
             <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
               {careerChips.slice(0, 4).map((role, i) => (
-                <ScrollReveal key={role} delay={400 + i * 100} animation="scale-in">
+                <ScrollReveal key={role} delay={400 + i * 80} animation="scale-in">
                   <FloatingCard>
                     <div className="glass p-8 rounded-[2rem] text-center card-3d shadow-soft-lg group cursor-pointer hover:bg-white transition-colors duration-500">
-                      <div className="w-10 h-1 bg-primary-500/20 rounded-full mx-auto mb-6 group-hover:bg-primary-500 transition-colors" />
-                      <p className="font-bold text-neutral-800 tracking-tight">{role}</p>
+                      <div className="w-10 h-1 bg-primary-300 rounded-full mx-auto mb-6 group-hover:bg-primary-600 transition-colors" />
+                      <p className="font-bold text-primary-900 tracking-tight">{role}</p>
                     </div>
                   </FloatingCard>
                 </ScrollReveal>
@@ -144,44 +129,30 @@ export const Home: React.FC = () => {
         </Container>
       </section>
 
-      {/* Philosophy Section */}
       <section className="py-40 bg-white relative">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <ScrollReveal animation="slide-in-right">
               <div className="relative group p-4">
-                {/* Orbital Background Elements */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-[120%] h-[120%] border border-primary-500/10 rounded-full animate-spin-slow" />
-                  <div className="absolute w-[90%] h-[90%] border border-primary-500/5 rounded-full animate-spin-slow-reverse" />
-                  <div className="absolute -inset-20 bg-primary-500/5 blur-[100px] rounded-full animate-pulse-slow" />
-                </div>
-
-                <FloatingCard intensity={15}>
-                  <div className="relative glass p-1 rounded-[3.5rem] shadow-soft-xl border border-white/60 overflow-hidden group-hover:shadow-glow transition-all duration-700">
-                    <div className="aspect-square bg-white rounded-[3rem] overflow-hidden flex items-center justify-center p-0 relative">
-                      {/* Depth Layers */}
-                      <div className="absolute inset-0 mesh-gradient opacity-30" />
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.2)_0%,transparent_70%)]" />
-
-                      <div className="relative w-full h-full flex items-center justify-center z-10 p-8">
-                        <img
-                          src="/brain-viz.png"
-                          alt="AI Intelligence Visualization"
-                          className="w-full h-full object-contain float-3d drop-shadow-2xl scale-110"
-                        />
-                      </div>
-
-                      {/* Floating Data Nodes */}
-                      <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-primary-400 rounded-full blur-[2px] animate-pulse-slow" />
-                      <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-primary-500 rounded-full blur-[1px] animate-float" />
-                    </div>
+                <div className="relative rounded-[3.5rem] border border-primary-100 bg-gradient-to-br from-primary-50 via-white to-primary-100 shadow-soft-xl p-8">
+                  <div className="grid gap-6">
+                    {[
+                      ['Career Direction', 'Data-driven path confidence'],
+                      ['Skill Focus', 'Pinpoint high-impact competencies'],
+                      ['Opportunity Fit', 'Match priorities to outcomes'],
+                    ].map(([title, subtitle], index) => (
+                      <FloatingCard key={title} intensity={8}>
+                        <div className="rounded-3xl border border-primary-100/80 bg-white/90 backdrop-blur-lg px-6 py-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg">
+                          <p className="text-xs uppercase tracking-[0.2em] text-primary-600 font-bold mb-2">0{index + 1}</p>
+                          <h3 className="text-2xl font-bold text-primary-950 mb-1">{title}</h3>
+                          <p className="text-sm text-neutral-500 font-medium">{subtitle}</p>
+                        </div>
+                      </FloatingCard>
+                    ))}
                   </div>
-                </FloatingCard>
-
-                {/* Decorative Highlights */}
-                <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-500/10 blur-3xl rounded-full" />
-                <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-accent-500/5 blur-3xl rounded-full" />
+                  <div className="absolute -top-8 -right-8 w-28 h-28 bg-primary-200/60 blur-2xl rounded-full" />
+                  <div className="absolute -bottom-8 -left-8 w-36 h-36 bg-primary-500/10 blur-3xl rounded-full" />
+                </div>
               </div>
             </ScrollReveal>
 
@@ -190,7 +161,7 @@ export const Home: React.FC = () => {
                 <h2 className="text-display-md font-bold tracking-tighter text-neutral-950 leading-none">
                   Behavioral Science meets
                   <br />
-                  <span className="text-primary-500">Professional Intelligence.</span>
+                  <span className="text-primary-700">Professional Intelligence.</span>
                 </h2>
               </ScrollReveal>
               <ScrollReveal delay={300}>
@@ -203,8 +174,7 @@ export const Home: React.FC = () => {
         </Container>
       </section>
 
-      {/* Interactive Process */}
-      <section className="py-40 bg-neutral-50">
+      <section className="py-40 bg-primary-50">
         <Container>
           <div className="text-center mb-24">
             <ScrollReveal>
@@ -216,11 +186,11 @@ export const Home: React.FC = () => {
             {howItWorksSteps.map((step, idx) => (
               <ScrollReveal key={step.number} delay={idx * 100} animation="scale-in">
                 <FloatingCard className="h-full">
-                  <div className="group h-full p-10 rounded-[2.5rem] glass hover:bg-white transition-all duration-500 border border-white/40 shadow-soft-lg hover:shadow-soft-xl card-3d">
-                    <div className="w-14 h-14 rounded-2xl bg-primary-950 flex items-center justify-center text-white mb-8 group-hover:scale-110 transition-transform">
+                  <div className="group h-full p-10 rounded-[2.5rem] glass hover:bg-white transition-all duration-500 border border-primary-100/70 shadow-soft-lg hover:shadow-soft-xl card-3d">
+                    <div className="w-14 h-14 rounded-2xl bg-primary-900 flex items-center justify-center text-white mb-8 group-hover:scale-105 transition-transform duration-300">
                       {step.icon}
                     </div>
-                    <span className="text-[10px] font-bold px-4 py-1.5 rounded-full bg-neutral-100 text-neutral-600 uppercase tracking-widest mb-6 inline-block">
+                    <span className="text-[10px] font-bold px-4 py-1.5 rounded-full bg-primary-100 text-primary-700 uppercase tracking-widest mb-6 inline-block">
                       Phase 0{step.number}
                     </span>
                     <h3 className="text-2xl font-bold text-neutral-900 mb-4">{step.title}</h3>
@@ -235,14 +205,14 @@ export const Home: React.FC = () => {
         </Container>
       </section>
 
-      {/* Pricing - Strategic Access */}
       <section className="py-40 bg-primary-950 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+        <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-950 to-primary-800 opacity-90" />
         <Container className="relative z-10">
           <div className="text-center mb-24">
             <ScrollReveal>
               <h2 className="text-display-md font-bold mb-8 tracking-tighter">Access Excellence</h2>
-              <p className="text-primary-300/60 text-xl font-medium">Strategic investment in your professional trajectory.</p>
+              <p className="text-primary-200/80 text-xl font-medium">Strategic investment in your professional trajectory.</p>
             </ScrollReveal>
           </div>
 
@@ -255,7 +225,7 @@ export const Home: React.FC = () => {
                 >
                   {i === 1 && (
                     <div className="absolute top-0 right-0 p-6">
-                      <span className="px-4 py-1.5 bg-primary-500 text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-full">
+                      <span className="px-4 py-1.5 bg-primary-600 text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-full">
                         Recommended
                       </span>
                     </div>
@@ -268,13 +238,13 @@ export const Home: React.FC = () => {
                   <ul className="space-y-6 mb-12">
                     {['Full Assessment', 'Career Roadmap', 'Export Support'].map((feature) => (
                       <li key={feature} className="flex gap-4 items-center">
-                        <span className={`w-1.5 h-1.5 rounded-full ${i === 1 ? 'bg-primary-500' : 'bg-white/40'}`} />
+                        <span className={`w-1.5 h-1.5 rounded-full ${i === 1 ? 'bg-primary-600' : 'bg-white/40'}`} />
                         <span className="text-xs font-bold tracking-widest uppercase opacity-70">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   <button
-                    className={`w-full py-5 rounded-2xl font-bold tracking-widest text-[10px] uppercase transition-all ${i === 1 ? 'bg-primary-950 text-white hover:bg-black' : 'bg-white/10 text-white hover:bg-white/20'
+                    className={`w-full py-5 rounded-2xl font-bold tracking-widest text-[10px] uppercase transition-all duration-300 hover:scale-[1.01] ${i === 1 ? 'bg-primary-900 text-white hover:bg-primary-800' : 'bg-white/10 text-white hover:bg-white/20'
                       }`}
                   >
                     Initialize {plan}
@@ -286,17 +256,16 @@ export const Home: React.FC = () => {
         </Container>
       </section>
 
-      {/* Footer CTA */}
       <section className="py-20 bg-white">
         <Container>
-          <div className="flex flex-col md:flex-row justify-between items-center gap-10 border-t border-neutral-100 pt-20">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-10 border-t border-primary-100 pt-20">
             <p className="text-neutral-400 font-bold tracking-[0.3em] uppercase text-[10px]">
               © Sandbox Scholars • Professional Excellence
             </p>
             <div className="flex gap-10">
-              <Link to="/assessment" className="text-[10px] font-bold tracking-[0.3em] uppercase text-neutral-900 hover:text-primary-500 transition-colors">Assessment</Link>
-              <Link to="/results" className="text-[10px] font-bold tracking-[0.3em] uppercase text-neutral-900 hover:text-primary-500 transition-colors">Careers</Link>
-              <Link to="/saved" className="text-[10px] font-bold tracking-[0.3em] uppercase text-neutral-900 hover:text-primary-500 transition-colors">Saved</Link>
+              <Link to="/assessment" className="text-[10px] font-bold tracking-[0.3em] uppercase text-neutral-900 hover:text-primary-600 transition-colors">Assessment</Link>
+              <Link to="/results" className="text-[10px] font-bold tracking-[0.3em] uppercase text-neutral-900 hover:text-primary-600 transition-colors">Careers</Link>
+              <Link to="/saved" className="text-[10px] font-bold tracking-[0.3em] uppercase text-neutral-900 hover:text-primary-600 transition-colors">Saved</Link>
             </div>
           </div>
         </Container>

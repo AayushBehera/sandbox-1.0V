@@ -1,0 +1,31 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#043F31"/>
+      <stop offset="0.55" stop-color="#065437"/>
+      <stop offset="1" stop-color="#0B6A41"/>
+    </linearGradient>
+    <linearGradient id="archLight" x1="512" y1="0" x2="512" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4ADE80" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4ADE80" stop-opacity="0.02"/>
+    </linearGradient>
+    <linearGradient id="archDeep" x1="512" y1="0" x2="512" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#064E3B" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#03291F" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <circle cx="160" cy="90" r="220" fill="#4ADE80" opacity="0.14" filter="url(#soft)"/>
+
+  <path d="M-60 540C-60 205 216 -60 552 -60C888 -60 1164 205 1164 540V1100H-60V540Z" fill="url(#archLight)"/>
+  <path d="M110 590C110 334 322 122 578 122C834 122 1046 334 1046 590V1100H110V590Z" fill="url(#archDeep)" opacity="0.75"/>
+  <path d="M228 640C228 442 391 279 589 279C787 279 950 442 950 640V1100H228V640Z" fill="url(#archDeep)" opacity="0.82"/>
+  <path d="M334 692C334 552 449 437 589 437C729 437 844 552 844 692V1100H334V692Z" fill="url(#archDeep)" opacity="0.9"/>
+
+  <text x="190" y="470" fill="white" font-family="Inter, Arial, sans-serif" font-size="152" font-weight="800" letter-spacing="-3">Sandbox</text>
+  <text x="190" y="625" fill="white" font-family="Inter, Arial, sans-serif" font-size="152" font-weight="800" letter-spacing="-3">Scholars</text>
+</svg>

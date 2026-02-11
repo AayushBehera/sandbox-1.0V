@@ -1,61 +1,59 @@
 import { useRef, useEffect, ReactNode } from 'react';
 
 interface FloatingCardProps {
-    children: ReactNode;
-    className?: string;
-    intensity?: number;
+  children: ReactNode;
+  className?: string;
+  intensity?: number;
 }
 
 export const FloatingCard = ({
-    children,
-    className = '',
-    intensity = 15
+  children,
+  className = '',
+  intensity = 10
 }: FloatingCardProps) => {
-    const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const card = cardRef.current;
-        if (!card) return;
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
 
-        const handleMouseMove = (e: MouseEvent) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
 
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-            const rotateX = ((y - centerY) / centerY) * intensity;
-            const rotateY = ((centerX - x) / centerX) * intensity;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-            card.style.transform = `
-        perspective(1000px)
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-        translateZ(10px)
-      `;
-        };
+      const rotateX = ((y - centerY) / centerY) * intensity;
+      const rotateY = ((centerX - x) / centerX) * intensity;
 
-        const handleMouseLeave = () => {
-            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        };
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(6px)`;
+    };
 
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
+    const handleMouseLeave = () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+    };
 
-        return () => {
-            card.removeEventListener('mousemove', handleMouseMove);
-            card.removeEventListener('mouseleave', handleMouseLeave);
-        };
-    }, [intensity]);
+    card.addEventListener('mousemove', handleMouseMove);
+    card.addEventListener('mouseleave', handleMouseLeave);
 
-    return (
-        <div
-            ref={cardRef}
-            className={`transition-transform duration-300 ease-out ${className}`}
-            style={{ transformStyle: 'preserve-3d' }}
-        >
-            {children}
-        </div>
-    );
+    return () => {
+      card.removeEventListener('mousemove', handleMouseMove);
+      card.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [intensity]);
+
+  return (
+    <div
+      ref={cardRef}
+      className={`transition-transform duration-300 ease-out ${className}`}
+      style={{ transformStyle: 'preserve-3d' }}
+    >
+      {children}
+    </div>
+  );
 };
