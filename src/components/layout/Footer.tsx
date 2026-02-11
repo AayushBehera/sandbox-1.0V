@@ -53,35 +53,25 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-primary-950 text-primary-100">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
-          {/* Brand Section */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <img 
-                src="/logo.png" 
-                alt="Sandbox" 
-                className="h-8 w-auto"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const parent = target.parentElement;
-                  if (parent) {
-                    parent.innerHTML = '<span class="text-2xl font-bold text-white">Sandbox</span>';
-                  }
-                }}
+              <img
+                src="/sandbox-scholars-logo.svg"
+                alt="Sandbox Scholars"
+                className="h-10 w-auto"
               />
             </Link>
-            <p className="text-sm text-gray-400 mb-4">
+            <p className="text-sm text-primary-100/80 mb-4">
               Discover your perfect career path across every field—from tech to arts, business to healthcare.
             </p>
-            <p className="text-xs text-gray-500">
-              © {currentYear} Sandbox. All rights reserved.
+            <p className="text-xs text-primary-200/60">
+              © {currentYear} Sandbox Scholars. All rights reserved.
             </p>
           </div>
 
-          {/* Footer Links */}
           {footerSections.map((section) => (
             <div key={section.title}>
               <h3 className="text-white font-semibold mb-4">{section.title}</h3>
@@ -90,7 +80,7 @@ export const Footer: React.FC = () => {
                   <li key={link.label}>
                     <Link
                       to={link.path}
-                      className="text-sm hover:text-white transition-colors"
+                      className="text-sm text-primary-100/70 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
